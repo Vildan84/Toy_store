@@ -4,11 +4,14 @@ public class Toy {
     private String name;
     private String color;
     private Integer rate;
+    final Integer id;
 
-    Toy(String name, String color, Integer rate){
+    Toy(int ID, String name, String color, Integer rate){
+        this.id = ID;
         this.name = name;
         this.color = color;
         this.rate = rate;
+
     }
 
     public void setName(String name) {
@@ -35,7 +38,11 @@ public class Toy {
         this.rate = rate;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String toyInfo(){
-        return String.format("Name:%s/ Color:%s/ Rate:%d", this.name, this.color, this.rate);
+        return String.format("ID:%d, Name:%s / Color:%s / Rate:%d", this.id, this.name, this.color, this.rate);
     }
 }

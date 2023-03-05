@@ -1,24 +1,23 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class CreateToysList {
 
     final List<String> colors = Arrays.asList("red", "blue", "yellow", "white", "orange", "green");
     final List<String> names = Arrays.asList("Monkey", "Cat", "Dog", "Bear", "Mouse", "Elephant");
-    final List<Integer> rates = Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80);
     final ArrayList<Toy> prizeToys = new ArrayList<>();
 
     CreateToysList(Integer numberOfToys){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mmssSS");
         Random rand = new Random();
         for (int i = 0; i<numberOfToys; i++){
+            int toyId = Integer.parseInt(dateFormat.format(new Date())) + i;
             String color = colors.get(rand.nextInt(this.colors.size()));
             String name = names.get(rand.nextInt(this.names.size()));
-            int rate = rates.get(rand.nextInt(this.rates.size()));
-            prizeToys.add(new Toy(name, color, rate));
+            int rate = rand.nextInt(10,81);
+            prizeToys.add(new Toy(toyId, name, color, rate));
         }
     }
 
