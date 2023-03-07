@@ -4,29 +4,57 @@ import java.util.*;
 
 public class LotteryDraw {
 
-    private final HashMap<Integer, Integer> map;
+    private final ArrayList<Toy> toys;
+    private final ArrayList<Toy> winner;
     
-    LotteryDraw(HashMap<Integer, Integer> map){
-        this.map = map;
+    LotteryDraw(ArrayList<Toy> toys, ArrayList<Toy> winners){
+        this.winner = winners;
+        this.toys = toys;
     }
 
-    public Integer draw(){
+    /*
+    Метод Draw выявляет победителя на основе рейтинга игрушки
+     */
+
+    public void draw(){
         boolean flag = true;
         Random rand = new Random();
-        int winner = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
 
         while (flag){
-            for(Integer key: map.keySet()){
-                int num = rand.nextInt(50);
-                map.computeIfPresent(key, (k, v) -> v + num);
-                if(map.get(key) > 200){
-                    winner = key;
+            for(Toy toy: this.toys){
+                int step = rand.nextInt(50);
+                int rate;
+                if (map.containsKey(toy.getId())){
+                    map.computeIfPresent(toy.getId(), (k, v) -> v + step);
+                }
+                else{
+                    map.put(toy.getId(), toy.getRate() + step);
+                }
+                rate = map.get(toy.getId());
+
+                if(rate > 200){
+                    this.winner.add(toy);
+                    int remain = toy.getRemain() - 1;
+                    if (remain == 0){
+                        this.toys.remove(toy);
+                    }
+                    else{
+                        toy.setRemain(toy.getRemain() - 1);
+                    }
                     flag = false;
                     break;
                 }
             }
         }
-        return winner;
 
+    }
+
+    public ArrayList<Toy> getWinner() {
+        return winner;
+    }
+
+    public ArrayList<Toy> getToys() {
+        return toys;
     }
 }

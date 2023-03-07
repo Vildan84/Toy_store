@@ -5,12 +5,14 @@ public class Toy {
     private String color;
     private Integer rate;
     final Integer id;
+    private Integer remain;
 
-    Toy(int ID, String name, String color, Integer rate){
+    Toy(int ID, String name, String color, Integer rate, Integer remain){
         this.id = ID;
         this.name = name;
         this.color = color;
         this.rate = rate;
+        this.remain = remain;
 
     }
 
@@ -42,7 +44,16 @@ public class Toy {
         return id;
     }
 
+    public Integer getRemain() {
+        return remain;
+    }
+
+    public void setRemain(Integer remain) {
+        this.remain = remain;
+    }
+
     public String toyInfo(){
-        return String.format("ID:%d, Name:%s / Color:%s / Rate:%d", this.id, this.name, this.color, this.rate);
+        return String.format("ID:%d, Name:%s / Color:%s / Rate:%d / Remain:%d", this.id, this.name, this.color,
+                this.rate, this.remain);
     }
 }

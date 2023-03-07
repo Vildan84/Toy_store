@@ -9,6 +9,10 @@ public class CreateToysList {
     final List<String> names = Arrays.asList("Monkey", "Cat", "Dog", "Bear", "Mouse", "Elephant");
     final ArrayList<Toy> prizeToys = new ArrayList<>();
 
+    /*
+    Метод принимет на вход число и формирует список объектов Toy
+     */
+
     CreateToysList(Integer numberOfToys){
         SimpleDateFormat dateFormat = new SimpleDateFormat("mmssSS");
         Random rand = new Random();
@@ -17,7 +21,8 @@ public class CreateToysList {
             String color = colors.get(rand.nextInt(this.colors.size()));
             String name = names.get(rand.nextInt(this.names.size()));
             int rate = rand.nextInt(10,81);
-            prizeToys.add(new Toy(toyId, name, color, rate));
+            int remain = rand.nextInt(1, 3);
+            prizeToys.add(new Toy(toyId, name, color, rate, remain));
         }
     }
 
